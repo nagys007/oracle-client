@@ -1,4 +1,4 @@
-package de.metafinanz.srny.oracleclient;
+package com.example.oracleclient;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

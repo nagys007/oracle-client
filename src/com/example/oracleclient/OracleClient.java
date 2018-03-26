@@ -1,4 +1,4 @@
-package de.metafinanz.srny.oracleclient;
+package com.example.oracleclient;
 
 import java.util.Arrays;
 
@@ -6,6 +6,7 @@ import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -25,22 +26,25 @@ public class OracleClient {
 	private static final String USERNAME_OPTION = "username";
 	private static final String PASSWORD_OPTION = "password";
 	private static final String VERBOSE_OPTION = "verbose";
-
+	private static final String HELP_OPTION = "help";
+	
 	private Options options = new Options();
 
 	private static Options defineOptions() {
-		final Option hostOption = Option.builder("h").required(false).hasArg(true).longOpt(HOST_OPTION)
+		final Option hostOption = Option.builder("m").required(false).hasArg(true).longOpt(HOST_OPTION)
 				.desc("host as reachable IP or (resolvable) hostname, default is localhost").build();
 		final Option portOption = Option.builder("p").required(false).hasArg(true).longOpt(PORT_OPTION)
 				.desc("port number, default is 1521").build();
-		final Option sidOption = Option.builder("p").required(false).hasArg(true).longOpt(SID_OPTION)
+		final Option sidOption = Option.builder("s").required(false).hasArg(true).longOpt(SID_OPTION)
 				.desc("Oracle SID, default is orcl").build();
-		final Option usernameOption = Option.builder("p").required(false).hasArg(true).longOpt(USERNAME_OPTION)
+		final Option usernameOption = Option.builder("u").required(false).hasArg(true).longOpt(USERNAME_OPTION)
 				.desc("database user name, default is scott").build();
-		final Option passwordOption = Option.builder("p").required(false).hasArg(true).longOpt(PASSWORD_OPTION)
+		final Option passwordOption = Option.builder("w").required(false).hasArg(true).longOpt(PASSWORD_OPTION)
 				.desc("password of the user, default is tiger").build();
 		final Option verboseOption = Option.builder("v").required(false).hasArg(false).longOpt(VERBOSE_OPTION)
 				.desc("show progress with verbosity").build();
+		final Option helpOption = Option.builder("h").required(false).hasArg(false).longOpt(HELP_OPTION)
+				.desc("show usage help").build();
 		final Options options = new Options();
 		options.addOption(hostOption);
 		options.addOption(portOption);
@@ -48,6 +52,7 @@ public class OracleClient {
 		options.addOption(usernameOption);
 		options.addOption(passwordOption);
 		options.addOption(verboseOption);
+		options.addOption(helpOption);
 		return options;
 	}
 
@@ -76,6 +81,13 @@ public class OracleClient {
 		final String userName = commandLine.getOptionValue(USERNAME_OPTION, DEFAULT_USERNAME);
 		final String password = commandLine.getOptionValue(PASSWORD_OPTION, DEFAULT_PASSWORD);
 		
+		final boolean help = commandLine.hasOption(HELP_OPTION);
+		if ( help ) {
+			HelpFormatter formatter = new HelpFormatter();
+			formatter.printHelp( "java -cp /path/to/<fat>.jar " + OracleClient.class.getName(), options );
+			System.exit(0);
+		}
+			
 		final boolean verbose = commandLine.hasOption(VERBOSE_OPTION);
 		System.out.println("verbosity is set to '" + verbose + "'.");
 
