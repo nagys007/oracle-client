@@ -63,13 +63,20 @@ java -cp target/oracle-client-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.examp
 $ java -cp target/oracle-client-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.example.oracleclient.OracleClient --help
 ```
 usage: java -cp /path/to/<fat>.jar com.example.oracleclient.OracleClient
+
  -h,--help             show usage help
- -m,--host <arg>       host as reachable IP or (resolvable) hostname,
+
+ -m,--host <arg>       host as reachable IP or (resolvable) hostname
                        default is localhost
+
  -p,--port <arg>       port number, default is 1521
+
  -s,--sid <arg>        Oracle SID, default is orcl
+
  -u,--username <arg>   database user name, default is scott
+
  -v,--verbose          show progress with verbosity
+
  -w,--password <arg>   password of the user, default is tiger
 
 ```
