@@ -35,7 +35,7 @@ mvn install:install-file -Dfile=<Downloads folder>/ojdbc8.jar -DgroupId=com.orac
 ### Build
 
 ```
-$ mvn assembly
+$ mvn package
 [INFO] Scanning for projects...
 [INFO]                                                                         
 [INFO] ------------------------------------------------------------------------
